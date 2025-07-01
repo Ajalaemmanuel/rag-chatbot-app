@@ -59,7 +59,6 @@
       </div>
     </div>
 
-    <!-- My Chatbot Card -->
     <div class="card shadow-sm">
       <div class="card-body">
         <h4 class="card-title mb-3 text-center">RAG Chatbot 🤖</h4>
@@ -77,7 +76,7 @@
     const chatBox = document.getElementById('chatBox');
     const chatInput = document.getElementById('chatInput');
     const sendBtn = document.getElementById('sendBtn');
-    let documentProcessed = false; // A flag to check if a document is ready
+    let documentProcessed = false;
 
     // Handle document form submission
     document.getElementById('document-form').addEventListener('submit', function (e) {
@@ -93,7 +92,6 @@
                 documentContent = event.target.result;
                 submitDocumentToServer(documentContent);
             };
-            // For simplicity, we'll handle .txt files. PDFs and DOCs require more complex parsing.
             reader.readAsText(file);
         } else if (text.trim()) {
             documentContent = text.trim();
@@ -103,7 +101,6 @@
         }
     });
 
-    // Function to send document text to the backend
     async function submitDocumentToServer(textContent) {
         try {
             const response = await fetch('http://127.0.0.1:5000/submit', {
@@ -128,7 +125,6 @@
         }
     }
 
-    // Handle sending a message in the chat
     sendBtn.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') sendMessage();
@@ -147,7 +143,6 @@
         addMessage('user', userText);
         chatInput.value = '';
 
-        // Send question to the backend and get the bot's response
         try {
           const response = await fetch('http://127.0.0.1:5000/ask', {
                 method: 'POST',
@@ -167,7 +162,7 @@
         }
     }
 
-    // Function to add a message to the chat display
+    // This function helps us to add a message to the chat display
     function addMessage(sender, text) {
         const message = document.createElement('div');
         message.className = `message ${sender}`;
