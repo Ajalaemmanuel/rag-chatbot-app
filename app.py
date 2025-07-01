@@ -1,25 +1,16 @@
-# app.py
 
-# Import necessary libraries
 from flask import Flask, request, jsonify
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.vectorstores import FAISS
 from transformers import pipeline
 import os
-
-# --- CORRECTED IMPORT ---
-# We must import CORS from the flask_cors library specifically.
 from flask_cors import CORS
 
-# Initialize the Flask application
 app = Flask(__name__)
 
-# This now correctly applies the CORS rules to your app,
-# allowing it to handle preflight requests from the browser.
 CORS(app)
 
-# --- Global Variables ---
 vector_store = None
 qa_pipeline = pipeline("question-answering", model="distilbert-base-cased-distilled-squad")
 
